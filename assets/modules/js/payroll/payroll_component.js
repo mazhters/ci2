@@ -1,25 +1,7 @@
-$(document).ready(function() {
-    $('#departement').select2();
-    $('.select2').select2();
-
-    //Date Pickers
-    $('.input-append.date').datepicker({
-        autoclose: true,
-        todayHighlight: true
-    });
-
-    //Time pickers
-    $('.clockpicker ').clockpicker({
-        autoclose: true
-    });
-
-});
-/*
 var save_method; //for save method string
 var table;
 
 $(document).ready(function() {
-
 
     //datatables
     table = $('#table').DataTable({ 
@@ -30,7 +12,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "kehadiran/ajax_list/",
+            "url": "payroll_component/ajax_list/",
             "type": "POST"
         },
 
@@ -41,11 +23,11 @@ $(document).ready(function() {
             "orderable": false, //set not orderable
         },
         ],
+        "aoColumnDefs": [
+          { "bSortable": false, "aTargets": [ 3,4,5 ] }
+        ] 
 
     });
-
-    $('#table_wrapper .dataTables_length select').addClass("select2-wrapper span12");
-
 });
 
 
@@ -57,7 +39,7 @@ function add_user()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add user'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add Payroll Component'); // Set Title to Bootstrap modal title
 }
 
 function edit_user(id)
@@ -69,17 +51,19 @@ function edit_user(id)
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "users/ajax_edit/" + id,
+        url : "payroll_component/ajax_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
 
             $('[name="id"]').val(data.id);
-            $('[name="first_name"]').val(data.first_name);
-            $('[name="last_name"]').val(data.last_name);
+            $('[name="title"]').val(data.title);
+            $('[name="code"]').val(data.code);
+            $('[name="component_type_id"]').val(data.component_type_id);
+            $('[name="tax_component_id"]').val(data.tax_component_id);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit user'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Component'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -101,9 +85,9 @@ function save()
     var url;
 
     if(save_method == 'add') {
-        url = "users/ajax_add";
+        url = "payroll_component/ajax_add";
     } else {
-        url = "users/ajax_update";
+        url = "payroll_component/ajax_update";
     }
 
     // ajax adding data to database
@@ -149,7 +133,7 @@ function delete_user(id)
     {
         // ajax delete data to database
         $.ajax({
-            url : "users/ajax_delete/"+id,
+            url : "payroll_component/ajax_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -166,4 +150,3 @@ function delete_user(id)
 
     }
 }
-*/

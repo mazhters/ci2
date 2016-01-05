@@ -29,24 +29,31 @@
               </a>
             </li>
             <li class="">
-              <a href="javascript:;">
+              <a href="<?php echo base_url('attendance')?>">
                 <i class="fa fa-sign-in"></i>
-                <span class="title">Absensi</span>
+                <span class="title">Attendance</span>
+                <!--<span class="arrow"></span>-->
+              </a>
+              <!--
+              <ul class="sub-menu">
+                <li class="start active"><a href="<?php echo base_url('absensi/attendance')?>">Attendance</a></li>
+                <li><a href="<?php echo base_url('absensi/overtime')?>">Overtime</a></li>
+                <li><a href="<?php echo base_url('absensi/overtime_analysis')?>">Overtime Analysis</a></li>
+                <li><a href="<?php echo base_url('absensi/shift_schedule')?>">Shift Schedule</a></li>
+                <li><a href="<?php echo base_url('absensi/employee_finger')?>">Employee Finger</a></li>
+              </ul>
+              -->
+            </li>
+             <li class="">
+              <a href="javascript:;">
+                <i class="fa fa-usd"></i>
+                <span class="title">Payroll</span>
                 <span class="arrow"></span>
               </a>
               <ul class="sub-menu">
-                <li><a href="<?php echo base_url('absensi/kehadiran')?>">Kehadiran</a></li>
-                <li><a href="<?php echo base_url('absensi/overtime')?>">Overtime</a></li>
-                <li><a href="<?php echo base_url('absensi/overtime_analysis')?>">Overtime Analysis</a></li>
-                <li><a href="<?php echo base_url('absensi/shift_schedule')?>">Jadwal Shift</a></li>
-                <li><a href="<?php echo base_url('absensi/employee_finger')?>">Finger Karyawan</a></li>
+                <li><a href="<?php echo base_url('payroll/payroll_component')?>">Component</a></li>
+                <li><a href="<?php echo base_url('payroll/payroll_group')?>">Group</a></li>
               </ul>
-            </li>
-             <li class="">
-              <a href="<?php echo base_url('payroll')?>">
-                <i class="fa fa-usd"></i>
-                <span class="title">Payroll</span>
-              </a>
             </li>
             <!-- END SELECTED LINK -->
           </ul>
