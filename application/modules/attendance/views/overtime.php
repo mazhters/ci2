@@ -1,34 +1,7 @@
-<!-- BEGIN PAGE CONTAINER-->
-  <div class="page-content">
-    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-    <div id="portlet-config" class="modal hide">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
-      </div>
-      <div class="modal-body"> Widget settings form goes here </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="content">
-      <ul class="breadcrumb">
-        <li>
-          <p>YOU ARE HERE</p>
-        </li>
-        <li><a href="<?php echo base_url('absensi/overtime')?>" class="active">Overtime</a> </li>
-      </ul>
-      <div class="page-title"> <i class="icon-custom-left" onclick="javascript:window.location='<?php echo site_url("dashboard");?>'"></i>
-        <h3><span class="semi-bold">Overtime</span></h3>
-      </div>
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="grid simple ">
-            <!--
-            <div class="grid-title">
-              <h4>Table <span class="semi-bold">Styles</span></h4>
-            </div>
-            -->
-            <div class="grid-body ">
-                <form id="<?php echo $filename;?>">
+<div class="tab-pane" id="tab1FollowUs">
+  <div class="row">
+    <div class="col-md-12">
+      <form id="<?php echo $filename;?>">
                   <h3><?php echo $title;?></h3>
                   <table class="table table-striped table-hover">
                     <tr>
@@ -88,8 +61,6 @@
                     <?php }?>
                   </div>
                 </form>
-            </div>
-            </div>
-        </div>
     </div>
+  </div>
 </div>

@@ -1,25 +1,7 @@
-$(document).ready(function() {
-    $('#departement').select2();
-    $('.select2').select2();
-
-    //Date Pickers
-    $('.input-append.date').datepicker({
-        autoclose: true,
-        todayHighlight: true
-    });
-
-    //Time pickers
-    $('.clockpicker ').clockpicker({
-        autoclose: true
-    });
-
-});
-/*
 var save_method; //for save method string
 var table;
 
 $(document).ready(function() {
-
 
     //datatables
     table = $('#table').DataTable({ 
@@ -30,7 +12,7 @@ $(document).ready(function() {
 
         // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "kehadiran/ajax_list/",
+            "url": "payroll_group/ajax_list/",
             "type": "POST"
         },
 
@@ -41,11 +23,38 @@ $(document).ready(function() {
             "orderable": false, //set not orderable
         },
         ],
-
+        /*"aoColumnDefs": [
+          { "bSortable": false, "aTargets": [ 3,4,5 ] }
+        ] */
     });
 
-    $('#table_wrapper .dataTables_length select').addClass("select2-wrapper span12");
+    /*table_component = $('#table-group-component').DataTable({
+            "retrieve": true,
+            "paging": false, 
+            "processing": true, //Feature control the processing indicator.
+            "serverSide": true, //Feature control DataTables' server-side processing mode.
+            "order": [], //Initial no order.
 
+            // Load data for the table's content from an Ajax source
+            "ajax": {
+                "url": "payroll_group/ajax_component_list/",
+                "type": "POST",
+                "data": function ( d ) {
+                 d.group_id = $('#group_id').val();
+            }
+            },
+
+            //Set column definition initialisation properties.
+            "columnDefs": [
+            { 
+                "targets": [], //last column
+                "orderable": false, //set not orderable
+            },
+            ],
+            "bFilter": false,
+            "bPaginate": false,
+            "info": false,
+    });*/
 });
 
 
@@ -54,10 +63,11 @@ function add_user()
 {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
+    $('#group_id').val(0);
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add user'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add Payroll Group'); // Set Title to Bootstrap modal title
 }
 
 function edit_user(id)
@@ -66,20 +76,43 @@ function edit_user(id)
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
+    var array_comp = [];
+    var array_thp = [];
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "users/ajax_edit/" + id,
+        url : "payroll_group/ajax_edit/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
 
+            $.ajax({
+                url : "payroll_group/render_group_component/"+data.id,
+                type : "GET",
+                dataType: "JSON",
+                success: function(data2)
+                {
+                    for (index = 0; index < data2.length; ++index) {
+                        array_comp.push(data2[index].payroll_component_id);
+                        if (data2[index].is_thp == 1) {
+                            $(".td_is_thp").find('[value=' + data2[index].payroll_component_id + ']').prop("checked", true);
+                        };
+                    }
+                    $(".td_p_component").find('[value=' + array_comp.join('], [value=') + ']').prop("checked", true);
+                    //alert(array_comp);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error get data from ajax');
+                }
+            });
+
             $('[name="id"]').val(data.id);
-            $('[name="first_name"]').val(data.first_name);
-            $('[name="last_name"]').val(data.last_name);
+            $('[name="title"]').val(data.title);
+            $('[name="code"]').val(data.code);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit user'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Group'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -101,9 +134,9 @@ function save()
     var url;
 
     if(save_method == 'add') {
-        url = "users/ajax_add";
+        url = "payroll_group/ajax_add";
     } else {
-        url = "users/ajax_update";
+        url = "payroll_group/ajax_update";
     }
 
     // ajax adding data to database
@@ -118,6 +151,7 @@ function save()
             if(data.status) //if success close modal and reload ajax table
             {
                 $('#modal_form').modal('hide');
+
                 reload_table();
             }
             else
@@ -149,7 +183,7 @@ function delete_user(id)
     {
         // ajax delete data to database
         $.ajax({
-            url : "users/ajax_delete/"+id,
+            url : "payroll_group/ajax_delete/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
@@ -166,4 +200,3 @@ function delete_user(id)
 
     }
 }
-*/

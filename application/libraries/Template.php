@@ -164,11 +164,30 @@ class Template {
         {
             $css[] = '<link rel="stylesheet" href="' . assets_url($css_file) . '">';
         }
-        $css = implode('', $css);
+        $person_id = $this->_ci->session->userdata('person_id');
+        $data['person_nm'] = getValue('person_nm', 'hris_persons', array('person_id'=>'where/'.$person_id));
 
-        $header = $this->_ci->load->view('header', array(), TRUE);
+        $menu = $this->_ci->uri->segment(1, 0);
+        $data['active1']= $data['active2']=$data['active3']="";
+        switch ($menu) {
+            case 'dashboard':
+                $data['active1'] = "class='active'";
+                break;
+            case 'attendance':
+                $data['active2'] = "class='active'";
+                break;
+            case 'payroll':
+                $data['active3'] = "class='active'";
+                break;
+            default:
+                $$data['active1'] = "class='active'";
+                break;
+        }
+
+        $css = implode('', $css);
+        $header = $this->_ci->load->view('header', $data, TRUE);
         $footer = $this->_ci->load->view('footer', array(), TRUE);
-        $sidebar = $this->_ci->load->view('sidebar', array(), TRUE);
+        $sidebar = $this->_ci->load->view('sidebar', $data, TRUE);
         $main_content = $this->_ci->load->view($view, $data, TRUE);
 
         $body = $this->_ci->load->view('layout/' . $this->layout, array(

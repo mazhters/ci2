@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Payroll_model extends CI_Model {
+class Payroll_group_model extends CI_Model {
 
-	var $table = 'kg_admin';
-	var $column = array('name', 'username'); //set column field database for order and search
+	var $table = 'payroll_group';
+	var $column = array('title','code'); //set column field database for order and search
 	var $order = array('id' => 'asc'); // default order 
 
 	public function __construct()
@@ -12,6 +12,10 @@ class Payroll_model extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
+
+	//custom model
+
+	//e.o. custom model
 
 	private function _get_datatables_query()
 	{
@@ -22,24 +26,16 @@ class Payroll_model extends CI_Model {
 	
 		foreach ($this->column as $item) // loop column 
 		{
-			if($_POST['search']['value']) // if datatable send POST for search
+			foreach ($this->column as $item) 
+		{
+			if($_POST['search']['value'])
 			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND. 
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
+				($i===0) ? $this->db->like($item, $_POST['search']['value']) : $this->db->or_like($item, $_POST['search']['value']);
 			}
-			$column[$i] = $item; // set column array variable to order processing
+				
+			$column[$i] = $item;
 			$i++;
+		}
 		}
 		
 		if(isset($_POST['order'])) // here order processing
@@ -100,5 +96,11 @@ class Payroll_model extends CI_Model {
 	{
 		$this->db->where('id', $id);
 		$this->db->delete($this->table);
+	}
+
+	public function save_component($data)
+	{
+		$this->db->insert('payroll_group_component', $data);
+		return $this->db->insert_id();
 	}
 }

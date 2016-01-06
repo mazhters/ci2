@@ -21,7 +21,7 @@
           <!-- BEGIN LOGO NAV BUTTONS -->
           <ul class="nav pull-right notifcation-center">
             <li class="dropdown hidden-xs hidden-sm">
-              <a href="index.html" class="dropdown-toggle active" data-toggle="">
+              <a href="<?php echo base_url()?>" class="dropdown-toggle active" data-toggle="">
                 <div class="iconset top-home"></div>
               </a>
             </li>
@@ -63,7 +63,7 @@
               <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="Notifications">
                 <div class="user-details">
                   <div class="username">
-                    <span class="badge badge-important">3</span>&nbsp;Administrator<span class="bold"></span>
+                    <span class="badge badge-important">3</span>&nbsp;<?php echo strtok($person_nm, " ")?><span class="bold"></span>
                   </div>
                 </div>
                 <div class="iconset top-down-arrow"></div>

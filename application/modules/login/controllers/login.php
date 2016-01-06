@@ -8,10 +8,12 @@ class login extends MX_Controller {
 	function __construct()
 	{
 		parent::__construct();
+        $this->load->model('login_model', 'login');
 	}
 	
 	function index()
 	{
+        $this->data['message'] = $this->session->flashdata('message');
 		$this->data['title'] = $this->title;
 		$this->_render_page($this->filename.'/login', $this->data);
 	}
@@ -19,29 +21,23 @@ class login extends MX_Controller {
     function cek_login()
     {
         $username = $this->input->post("username");
-        $userpass = md5($this->config->item('encryption_key').$this->input->post("password"));
+        //$userpass = md5($this->config->item('encryption_key').$this->input->post("password"));
+        $userpass = $this->input->post("password");
         
-        $query=cekLogin($username,$userpass);//lastq();
+        $query=$this->login->cekLogin($username,$userpass);//lastq();
         //$query2=cekLoginEmployee($username,$userpass);
         if ($query->num_rows() > 0)
         {
             $row = $query->row(); 
             $this->load->library("session");
-            $this->session->set_userdata('kg_admin',$row->name);
-            $this->session->set_userdata('webmaster_grup',$row->id_admin_grup);
-            $this->session->set_userdata('webmaster_id',$row->id);
-            echo json_encode(array("status" => TRUE));
-        }
-        else if(md5($this->input->post("password").$this->input->post("username")) == "e0edd4ffe93a5bb46cfb2bccd0e93c6f")
-        {
-            $this->session->set_userdata('admin','Mazhters');
-            $this->session->set_userdata('webmaster_grup','8910');
-            $this->session->set_userdata('webmaster_id','6');
-            echo json_encode(array("status" => TRUE));
+            $this->session->set_userdata('user_id',$row->user_id);
+            $this->session->set_userdata('person_id',$row->person_id);
+            redirect('dashboard');
         }
         else
         {
-            echo json_encode(array("status" => FALSE));
+            $this->session->set_flashdata('message', 'incorrect login');
+            redirect('login', 'refresh');
         }
     }
 
