@@ -1,0 +1,4 @@
+.to{float: left;
+    margin-right: 1.5%;
+    padding-top: 3.5%;}
+.span2{width:20%;}

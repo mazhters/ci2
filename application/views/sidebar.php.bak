@@ -29,12 +29,6 @@
               </a>
             </li>
             <li class="">
-              <a href="<?php echo base_url('employee')?>">
-                <i class="fa fa-sign-in"></i>
-                <span class="title">Employee</span>
-              </a>
-            </li>
-            <li class="">
               <a href="<?php echo base_url('attendance')?>">
                 <i class="fa fa-sign-in"></i>
                 <span class="title">Attendance</span>
@@ -51,6 +45,12 @@
               -->
             </li>
             <li class="">
+              <a href="<?php echo base_url('employee')?>">
+                <i class="fa fa-sign-in"></i>
+                <span class="title">Employee</span>
+              </a>
+            </li>
+             <li class="">
               <a href="javascript:;">
                 <i class="fa fa-usd"></i>
                 <span class="title">Payroll</span>

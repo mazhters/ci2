@@ -19,6 +19,7 @@
     <?php echo $css; ?>
     <!-- BEGIN CORE CSS FRAMEWORK -->
     <link href="<?php echo assets_url('webarch/css/webarch.css')?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo assets_url('webarch/css/custom.css')?>" rel="stylesheet" type="text/css" />
     <!-- END CORE CSS FRAMEWORK -->
 
 

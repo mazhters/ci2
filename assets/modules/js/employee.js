@@ -39,19 +39,19 @@ $(document).ready(function() {
 		});
 		
 		//Search Edit Att
-    $(".btn-submit-att").click(function(){
-    	var act = $("#form_edit_att").attr("action");
-    	var dataz = $("#form_edit_att").serialize();
+    $(".btn-submit-emp").click(function(){
+    	var act = $("#form_edit_emp").attr("action");
+    	var dataz = $("#form_edit_emp").serialize();
 			$("#content").html('<img src="assets/assets/img/loading.gif"> loading...');
 			$.post(act, dataz,  function(response) {
 				//$("#content").html(response);
-		  	$("#content").load('attendance/list_attendance');
+		  	$("#content").load('employee/main');
 		  });
 		});
 		
 		//Back Att
-		$(".btn-cancel-att").click(function(){
-			$("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('attendance/list_attendance');
+		$(".btn-cancel-emp").click(function(){
+			$("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('employee/main');
 		});
 		
 		//Search Shift
@@ -116,26 +116,14 @@ $(document).ready(function() {
 		});
 });
 
-function loadOvertime()
+function loadEmp()
 {
-    $("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('attendance/overtime');
+    $("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('employee/main');
 }
 
-function loadAttendance()
+function detailEmp(id)
 {
-    $("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('attendance/list_attendance');
-}
-
-function loadShift()
-{
-    $("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('attendance/Shift');
-}
-
-function detailAtt(id)
-{
-	var start = $(".start_att").val();
-	var end = $(".end_att").val();
-  $("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('attendance/detail/'+id+'/'+start+'~'+end);
+	$("#content").html('<img src="assets/assets/img/loading.gif"> loading...').load('employee/detail/'+id);
 }
 
 function editAtt(id)

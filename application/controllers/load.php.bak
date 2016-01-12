@@ -1394,10 +1394,14 @@ class load extends CI_Controller {
 		$webmaster_id = permission();
 		$grup=array("A", "B", "C", "D");
 		$bln=array("01","02","03","04","05","06","07","08","09","10","11","12");
-		$jadwal_grup['A'] = array(1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1);
+		/*$jadwal_grup['A'] = array(1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1);
 		$jadwal_grup['B'] = array("off",1,1,1,2,2,"off",3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3);
 		$jadwal_grup['C'] = array(3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off");
-		$jadwal_grup['D'] = array(2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2);
+		$jadwal_grup['D'] = array(2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2);*/
+		$jadwal_grup['A'] = array("p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s","s","off","m","m","m","off","p");
+		$jadwal_grup['B'] = array("off","p","p","p","s","s","off","m","m","off","off","p","p","s","s","off","m","m","m","off","p","p","s","s","s","off","m","m");
+		$jadwal_grup['C'] = array("m","m","off","off","p","p","s","s","off","m","m","m","off","p","p","s","s","s","off","m","m","off","p","p","p","s","s","off");
+		$jadwal_grup['D'] = array("s","off","m","m","m","off","p","p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s");
 		
 		foreach($grup as $g) {
 			$emp = GetAll("hris_employee", array("employee_grup"=> "where/".$g));
@@ -1458,14 +1462,10 @@ class load extends CI_Controller {
 		$grup=array("A", "B", "C", "D");
 		$bln=array("01","02","03","04","05","06","07","08","09","10","11","12");
 		$bln=array("12","11","10");//,"09","08","07","06","05","04","03","02","01");
-		$jadwal_grup['A'] = array(1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1);
-		$jadwal_grup['B'] = array("off",1,1,1,2,2,"off",3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3);
-		$jadwal_grup['C'] = array(3,3,"off","off",1,1,2,2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off");
-		$jadwal_grup['D'] = array(2,"off",3,3,3,"off",1,1,2,2,2,"off",3,3,"off",1,1,1,2,2,"off",3,3,"off","off",1,1,2);
-		/*$jadwal_grup['A'] = array("p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s","s","off","m","m","m","off","p");
+		$jadwal_grup['A'] = array("p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s","s","off","m","m","m","off","p");
 		$jadwal_grup['B'] = array("off","p","p","p","s","s","off","m","m","off","off","p","p","s","s","off","m","m","m","off","p","p","s","s","s","off","m","m");
 		$jadwal_grup['C'] = array("m","m","off","off","p","p","s","s","off","m","m","m","off","p","p","s","s","s","off","m","m","off","p","p","p","s","s","off");
-		$jadwal_grup['D'] = array("s","off","m","m","m","off","p","p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s");*/
+		$jadwal_grup['D'] = array("s","off","m","m","m","off","p","p","s","s","s","off","m","m","off","p","p","p","s","s","off","m","m","off","off","p","p","s");
 		
 		foreach($grup as $g) {
 			$emp = GetAll("kg_hris_employee", array("employee_grup"=> "where/".$g));

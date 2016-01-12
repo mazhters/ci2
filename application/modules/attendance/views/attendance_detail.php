@@ -1,19 +1,30 @@
+<div class="grid simple transparent">
+	<div class="grid-title">
+		<h4>List <span class="semi-bold">Attendance</span></h4></a>
+		<div class="actions">
+			<a href="javascript:void(0);" onclick="backAtt('<?php echo $start_date;?>', '<?php echo $end_date;?>')"><i class='fa fa-chevron-circle-left'></i> Back</a>
+		</div>
+	</div>
+</div>
+
 <div class="col-md-6">
     <div class="row">
         <div class="tiles white col-md-12  no-padding">         
             <div class="tiles-body">
-                <h5 ><span class="semi-bold">Mitsubishi Chemical Indonesia</span></h5>
                 <div class="row">
+                	<?php
+                	foreach($emp->result_array() as $e) {
+                		?>
                     <div class="col-md-3">
                         <div class="">
-                            <img width="100" height="100" src="<?php echo assets_url('assets/img/profiles/d.jpg')?>" data-src="<?php echo assets_url('assets/img/profiles/d.jpg')?>" data-src-retina="<?php echo assets_url('assets/img/profiles/d2x.jpg')?>" alt="">
+                            <img width="100" height="100" src="<?php echo assets_url('assets/img/profiles/photo-default.png')?>" data-src="<?php echo assets_url('assets/img/profiles/photo-default.png')?>" data-src-retina="<?php echo assets_url('assets/img/profiles/photo-default.png')?>" alt="">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <span class="semi-bold">Name</span>
                     </div>
                     <div class="col-md-4">
-                        <span class="semi-bold">:</span>
+                        <span class="semi-bold">: <?php echo $e['person_nm'];?></span>
                     </div>
                     <br/><br/>
                     <div class="col-md-4">
@@ -29,11 +40,15 @@
                     <div class="col-md-4">
                         <span class="semi-bold">:</span>
                     </div>
+                    <?php
+                  }
+                  ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <table class="table table-striped table-hover">
     <tr>
     	<?php if(permissionaction()){?>
@@ -72,6 +87,11 @@
     			$r[$s.'_temp'] = $r[$s];
     			//$r[$s] = GetValue("person_nm","hris_persons", array("person_id"=> "where/".$r[$s]));
     		}
+    		else if($s == "shift")
+    		{
+    			$r[$s] = GetShift(GetValue("tgl_".intval($r['tanggal']),"kg_jadwal_shift", array("id_employee"=> "where/".$r['id_employee'], "bulan"=> "where/".$r['bulan'], "tahun"=> "where/".$r['tahun'])));
+    			//lastq();
+    		}
     		else if($s == "name" || $s == "keterangan" || $s == "scan_masuk" || $s == "scan_pulang") $r[$s] = $r[$s];
     		else if(($s == 'jh' || $s == 'hr') && $flag_tgl)
     		{
@@ -89,13 +109,14 @@
     		echo "<td>".$r[$s]."</td>";
     	}
     	if(!$r['id']) $r['id']=0;
+    	
     	if(permissionaction()){
     	echo "<td class='action'>";
 	    if($flag_tgl){ 
 	    	if(permissionactionz()){ 
 		    	if($tgl_today==date("Y-m-d")) echo "-";
-		    	else echo "<a href='".site_url($filename.'/edit/0/'.$r['tahun'].'-'.$r['bulan'].'-'.GetTanggal($r['tanggal']).'/'.$r['id_employee'].'/'.$r['id'].'/u')."'>Edit</a>";
-                //else echo '<a class="btn btn-sm btn-primary" href="javascript:void(0);" title="detail" onclick="detailAtt('."'".$r['tahun'].",".$r['bulan'].",".$r['tanggal'].",".$r['id_employee'].",".$r['id']."'".')"><i class="fa fa-pencil"></i></a>';
+		    	//else echo "<a href='".site_url($filename.'/edit/0/'.$r['tahun'].'-'.$r['bulan'].'-'.GetTanggal($r['tanggal']).'/'.$r['id_employee'].'/'.$r['id'].'/u')."'>Edit</a>";
+          else echo '<a class="btn btn-sm btn-primary" href="javascript:void(0);" title="detail" onclick="editAtt('."'".$r['id']."'".')"><i class="fa fa-pencil"></i></a>';
 	    	}
 	    } else echo "<a href='".site_url($filename.'/main/'.$r['a_id'].'/'.$tgl)."'>Detail</a>";
 	    echo "</td>";

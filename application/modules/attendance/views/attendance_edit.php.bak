@@ -23,7 +23,7 @@
               echo GetValue("person_nm", "hris_persons", array("person_id"=>"where/".$val['id_employee']));?>
             </div>
             <div class="form-group">
-              <label class="form-label">Date</label>
+              <label class="form-label">Tanggal</label>
               <div class="row">
               	<div class="col-md-12">
                   <div id="datepicker_start" class="input-append date success no-padding">

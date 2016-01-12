@@ -615,7 +615,7 @@ if (!function_exists('GetColumns')){
 	function GetColumns($tbl)
 	{
 		$CI =& get_instance();
-		//if(substr($tbl,0,3) != "kg_") $tbl = "kg_".$tbl;
+		if(substr($tbl,0,3) != "kg_") $tbl = "kg_".$tbl;
 		$query = $CI->db->query("SHOW COLUMNS FROM ".$tbl);
 		return $query->result_array();
 	}

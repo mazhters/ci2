@@ -663,8 +663,8 @@ class attendance extends MX_Controller {
         //$data['opt_dep'] = GetOptDepartment();
         //$data['opt_dep'][''] = "";
                
-        $filter = array("bulan"=> "order/asc", "tahun"=> "order/asc", "person_nm"=> "order/asc");
-        //$filter = array("tahun"=> "order/asc", "bulan"=> "order/asc", "person_nm"=> "order/asc");
+        //$filter = array("bulan"=> "order/asc", "tahun"=> "order/asc", "person_nm"=> "order/asc");
+        $filter = array("tahun"=> "order/asc", "bulan"=> "order/asc", "person_nm"=> "order/asc");
         $filter_where_in = array();
         if($dep && $dep!="-") {
             $exp = explode("-",$dep);
